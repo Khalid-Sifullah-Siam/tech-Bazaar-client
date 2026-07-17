@@ -14,7 +14,9 @@ export async function getCurrentUser(request) {
 export async function requireUser(request, roles = []) {
   const user = await getCurrentUser(request);
   if (!user) throw new Response("Unauthorized", { status: 401 });
-  if (user.status === "blocked") throw new Response("Account blocked", { status: 403 });
+  if (["blocked", "suspended"].includes(user.status)) {
+    throw new Response(`Account ${user.status}`, { status: 403 });
+  }
   if (roles.length && !roles.includes(user.role)) {
     throw new Response("Forbidden", { status: 403 });
   }

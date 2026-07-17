@@ -276,11 +276,14 @@ export async function PATCH(request, context) {
 
     if (resource === "users") {
       const admin = await requireUser(request, ["admin"]);
+      const target = await users.findOne({ id }, { projection: { role: 1 } });
+      if (!target) return new Response("User not found", { status: 404 });
+      if (target.role === "admin") throw new Response("Admin accounts cannot be changed", { status: 403 });
       const update = {};
-      if (["buyer", "seller", "admin"].includes(body.role)) update.role = body.role;
-      if (["active", "blocked"].includes(body.status)) update.status = body.status;
+      if (["buyer", "seller"].includes(body.role)) update.role = body.role;
+      if (["active", "blocked", "suspended"].includes(body.status)) update.status = body.status;
       if (!Object.keys(update).length) throw new Response("Invalid update", { status: 400 });
-      if (id === admin.id && update.status === "blocked") throw new Response("You cannot block yourself", { status: 400 });
+      if (id === admin.id) throw new Response("You cannot change your own account", { status: 400 });
       await users.updateOne({ id }, { $set: update });
       return Response.json({ success: true });
     }
