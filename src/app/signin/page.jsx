@@ -9,23 +9,35 @@ import {
   Input,
   Label,
   Surface,
-  ListBox,
-  Select,
   TextField,
 } from "@heroui/react";
-import { redirect } from "next/navigation";
-import React from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function SignInPage() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
 
-    await authClient.signIn.email({
+    const { error } = await authClient.signIn.email({
       ...user,
-      callbackURL: "/",
     });
+
+    setIsLoading(false);
+    if (error) {
+      toast.error(error.message || "Email অথবা password সঠিক নয়");
+      return;
+    }
+
+    toast.success("Login successful");
+    router.push("/");
+    router.refresh();
   };
 
   return (
@@ -33,8 +45,8 @@ export default function SignInPage() {
       <Surface className="w-full">
         <Form onSubmit={onSubmit}>
           <Fieldset className="w-full">
-            <Fieldset.Legend>Signup</Fieldset.Legend>
-            <Description>Create your account</Description>
+            <Fieldset.Legend>Sign in</Fieldset.Legend>
+            <Description>Sign in to your account</Description>
             <Fieldset.Group>
               <TextField isRequired name="email" type="email">
                 <Label>Email</Label>
@@ -49,8 +61,8 @@ export default function SignInPage() {
               </TextField>
             </Fieldset.Group>
 
-            <Button type="submit" className={"w-full"}>
-              Signin
+            <Button type="submit" className="w-full" isDisabled={isLoading}>
+              {isLoading ? "Signing in..." : "Sign in"}
             </Button>
           </Fieldset>
         </Form>

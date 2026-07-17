@@ -13,21 +13,34 @@ import {
   Select,
   TextField,
 } from "@heroui/react";
-import { redirect } from "next/navigation";
-import React from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
 
-    await authClient.signUp.email({
+    const { error } = await authClient.signUp.email({
       ...user,
-      plan: 'free',
+      plan: "free",
     });
 
-    redirect('/')
+    setIsLoading(false);
+    if (error) {
+      toast.error(error.message || "Account তৈরি করা যায়নি");
+      return;
+    }
+
+    toast.success("Account created successfully");
+    router.push("/");
+    router.refresh();
   };
 
   return (
@@ -82,8 +95,8 @@ export default function SignUpPage() {
               </Select>
             </Fieldset.Group>
 
-            <Button type="submit" className={"w-full"}>
-              Signup
+            <Button type="submit" className="w-full" isDisabled={isLoading}>
+              {isLoading ? "Creating account..." : "Sign up"}
             </Button>
           </Fieldset>
         </Form>
