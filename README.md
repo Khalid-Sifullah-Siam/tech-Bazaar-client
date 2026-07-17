@@ -1,16 +1,46 @@
+<p align="center">
+  <img src="./public/logo.webp" alt="Tech Bazaar logo" width="96" />
+</p>
+
 <h1 align="center">Tech Bazaar</h1>
 
 <p align="center"><strong>Discover products. Sell with control. Buy securely with Stripe.</strong></p>
 
-Tech Bazaar is a modern role-based technology marketplace for buyers, sellers, and administrators. Buyers can discover approved products and complete secure Stripe checkouts, sellers can manage their catalog and plans, and admins can moderate the marketplace from a dedicated dashboard.
+<p align="center">A modern role-based marketplace built for confident shopping, controlled selling, and secure payments.</p>
 
-<p>
+<p align="center">
   <a href="https://tech-bazar-client.vercel.app/">Live Site</a> |
   <a href="https://github.com/Khalid-Sifullah-Siam/tech-Bazaar-client">Client Repository</a> |
   <a href="https://github.com/Khalid-Sifullah-Siam/tech-Bazaar-server">Server Repository</a>
 </p>
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js) ![React](https://img.shields.io/badge/React-19-149eca?logo=react) ![MongoDB](https://img.shields.io/badge/MongoDB-database-47a248?logo=mongodb) ![Stripe](https://img.shields.io/badge/Stripe-payments-635bff?logo=stripe) ![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-111111?logo=next.js&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white" alt="React" />
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-4-06b6d4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/MongoDB-database-47a248?logo=mongodb&logoColor=white" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/Stripe-payments-635bff?logo=stripe&logoColor=white" alt="Stripe" />
+  <img src="https://img.shields.io/badge/Deployed%20on-Vercel-111111?logo=vercel&logoColor=white" alt="Vercel" />
+</p>
+
+<p align="center">
+  <a href="#key-features">Features</a> ·
+  <a href="#user-roles">Roles</a> ·
+  <a href="#getting-started">Getting Started</a> ·
+  <a href="#screenshots">Screenshots</a>
+</p>
+
+<hr />
+
+## Why Tech Bazaar?
+
+<table>
+  <tr>
+    <td width="33%"><strong>For buyers</strong><br />Discover approved products, pay securely with Stripe, and keep every purchase in one place.</td>
+    <td width="33%"><strong>For sellers</strong><br />Manage products, track performance, upgrade plans, and grow with marketplace tools.</td>
+    <td width="33%"><strong>For admins</strong><br />Moderate products, manage account access, control roles, and monitor platform activity.</td>
+  </tr>
+</table>
 
 ## Overview
 
