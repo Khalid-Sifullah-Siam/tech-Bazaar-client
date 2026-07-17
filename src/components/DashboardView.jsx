@@ -37,11 +37,18 @@ function DeleteProductDialog({ product, onDelete }) {
             <AlertDialog.Body>
               <p><strong>{product.name}</strong> will be permanently deleted. This action cannot be undone.</p>
             </AlertDialog.Body>
-            <AlertDialog.Footer className="flex justify-end gap-3">
-              <AlertDialog.CloseTrigger isDisabled={isDeleting} className="rounded-lg border px-4 py-2 disabled:opacity-60">Cancel</AlertDialog.CloseTrigger>
+            <AlertDialog.Footer className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
               <button
                 type="button"
-                className="rounded-lg bg-red-600 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-60"
+                className="min-w-32 rounded-lg border border-separator bg-surface px-4 py-2 font-medium text-foreground transition-colors hover:bg-default disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={isDeleting}
+                onClick={() => setIsOpen(false)}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="min-w-32 rounded-lg bg-red-600 px-4 py-2 font-medium text-white transition-colors hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
                 disabled={isDeleting}
                 onClick={confirmDelete}
               >
