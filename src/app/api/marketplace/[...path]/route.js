@@ -22,6 +22,12 @@ function productId(id) {
   return new ObjectId(id);
 }
 
+function userFilter(id) {
+  const filters = [{ id }];
+  if (ObjectId.isValid(id)) filters.push({ _id: new ObjectId(id) });
+  return { $or: filters };
+}
+
 function productInput(body) {
   const price = Number(body.price);
   const stock = Number(body.stock);
@@ -99,7 +105,11 @@ export async function GET(request, context) {
 
     if (resource === "users") {
       await requireUser(request, ["admin"]);
-      return Response.json(serialize(await users.find({}, { projection: { password: 0 } }).sort({ createdAt: -1 }).toArray()));
+      const items = await users.find({}, { projection: { password: 0 } }).sort({ createdAt: -1 }).toArray();
+      return Response.json(serialize(items.map((user) => ({
+        ...user,
+        id: user.id || user._id.toString(),
+      }))));
     }
 
     if (resource === "stats") {
@@ -276,16 +286,18 @@ export async function PATCH(request, context) {
 
     if (resource === "users") {
       const admin = await requireUser(request, ["admin"]);
-      const target = await users.findOne({ id }, { projection: { role: 1 } });
+      const filter = userFilter(id);
+      const target = await users.findOne(filter, { projection: { role: 1, id: 1 } });
       if (!target) return new Response("User not found", { status: 404 });
       if (target.role === "admin") throw new Response("Admin accounts cannot be changed", { status: 403 });
       const update = {};
       if (["buyer", "seller"].includes(body.role)) update.role = body.role;
       if (["active", "blocked", "suspended"].includes(body.status)) update.status = body.status;
       if (!Object.keys(update).length) throw new Response("Invalid update", { status: 400 });
-      if (id === admin.id) throw new Response("You cannot change your own account", { status: 400 });
-      await users.updateOne({ id }, { $set: update });
-      return Response.json({ success: true });
+      const targetId = target.id || target._id.toString();
+      if (targetId === admin.id) throw new Response("You cannot change your own account", { status: 400 });
+      const result = await users.updateOne(filter, { $set: update });
+      return Response.json({ success: true, modified: result.modifiedCount > 0 });
     }
 
     if (resource === "profile") {
