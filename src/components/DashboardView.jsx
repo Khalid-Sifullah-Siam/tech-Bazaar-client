@@ -54,13 +54,13 @@ function ProductCard({ product, role, onAction, onEdit }) {
         <div className="mt-4 flex flex-wrap gap-2">
           {role === "admin" ? (
             <>
-              <button className="rounded-lg bg-green-600 px-3 py-2 text-sm text-white" onClick={() => onAction(product._id, "PATCH", { status: "approved" }, "Product approved")}>Approve</button>
-              <button className="rounded-lg bg-amber-600 px-3 py-2 text-sm text-white" onClick={() => onAction(product._id, "PATCH", { status: "rejected", rejectionReason: "Does not meet marketplace requirements" }, "Product rejected")}>Reject</button>
+              <button className="rounded-lg bg-green-600 px-3 py-2 text-sm text-white" onClick={() => onAction(product._id, "PATCH", { status: "approved" })}>Approve</button>
+              <button className="rounded-lg bg-amber-600 px-3 py-2 text-sm text-white" onClick={() => onAction(product._id, "PATCH", { status: "rejected", rejectionReason: "Does not meet marketplace requirements" })}>Reject</button>
             </>
           ) : (
             <button className="rounded-lg border px-3 py-2 text-sm" onClick={() => onEdit(product)}>Edit</button>
           )}
-          <DeleteProductDialog product={product} onDelete={() => onAction(product._id, "DELETE", undefined, "Product deleted")} />
+          <DeleteProductDialog product={product} onDelete={() => onAction(product._id, "DELETE")} />
         </div>
       </div>
     </article>
@@ -115,7 +115,7 @@ export default function DashboardView({ mode }) {
       .finally(() => setLoading(false));
   }, [session, isPending, endpoint, reload, router]);
 
-  const productAction = async (id, method, body, successMessage) => {
+  const productAction = async (id, method, body) => {
     const response = await fetch(`/api/marketplace/products/${id}`, {
       method,
       headers: { "Content-Type": "application/json" },
@@ -123,7 +123,14 @@ export default function DashboardView({ mode }) {
     });
     const result = await response.json().catch(() => ({}));
     if (!response.ok) return toast.error(result.message || "Action failed");
-    toast.success(successMessage || "Product updated");
+    const successMessage = method === "DELETE"
+      ? "Product deleted"
+      : body.status === "approved"
+        ? "Product approved"
+        : body.status === "rejected"
+          ? "Product rejected"
+          : "Product updated";
+    toast.success(successMessage);
     setReload((value) => value + 1);
   };
 
