@@ -72,18 +72,18 @@ function UserActions({ user, onAction }) {
   const status = user.status || "active";
   return (
     <div className="flex min-w-100 flex-wrap gap-2 py-3">
-      <button className="rounded border px-3 py-2" onClick={() => onAction(user.id, { role: user.role === "seller" ? "buyer" : "seller" })}>
+      <button className="rounded border px-3 py-2" onClick={() => onAction(user.id, { role: user.role === "seller" ? "buyer" : "seller" }, `User role changed to ${user.role === "seller" ? "buyer" : "seller"}`)}>
         Make {user.role === "seller" ? "buyer" : "seller"}
       </button>
       {status === "blocked" ? (
-        <button className="rounded bg-green-600 px-3 py-2 text-white" onClick={() => onAction(user.id, { status: "active" })}>Unblock</button>
+        <button className="rounded bg-green-600 px-3 py-2 text-white" onClick={() => onAction(user.id, { status: "active" }, "User unblocked")}>Unblock</button>
       ) : (
-        <button className="rounded bg-red-600 px-3 py-2 text-white" onClick={() => onAction(user.id, { status: "blocked" })}>Block</button>
+        <button className="rounded bg-red-600 px-3 py-2 text-white" onClick={() => onAction(user.id, { status: "blocked" }, "User blocked")}>Block</button>
       )}
       {status === "suspended" ? (
-        <button className="rounded bg-green-600 px-3 py-2 text-white" onClick={() => onAction(user.id, { status: "active" })}>Unsuspend</button>
+        <button className="rounded bg-green-600 px-3 py-2 text-white" onClick={() => onAction(user.id, { status: "active" }, "User unsuspended")}>Unsuspend</button>
       ) : (
-        <button className="rounded bg-amber-600 px-3 py-2 text-white" onClick={() => onAction(user.id, { status: "suspended" })}>Suspend</button>
+        <button className="rounded bg-amber-600 px-3 py-2 text-white" onClick={() => onAction(user.id, { status: "suspended" }, "User suspended")}>Suspend</button>
       )}
     </div>
   );
@@ -127,7 +127,7 @@ export default function DashboardView({ mode }) {
     setReload((value) => value + 1);
   };
 
-  const userAction = async (id, body) => {
+  const userAction = async (id, body, successMessage) => {
     const response = await fetch(`/api/marketplace/users/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -135,7 +135,7 @@ export default function DashboardView({ mode }) {
     });
     const result = await response.json().catch(() => ({}));
     if (!response.ok) return toast.error(result.message || "User update failed");
-    toast.success("User updated");
+    toast.success(successMessage);
     setReload((value) => value + 1);
   };
 
