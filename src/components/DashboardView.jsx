@@ -15,8 +15,18 @@ const labels = {
 };
 
 function DeleteProductDialog({ product, onDelete }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const confirmDelete = async () => {
+    setIsDeleting(true);
+    const deleted = await onDelete();
+    setIsDeleting(false);
+    if (deleted) setIsOpen(false);
+  };
+
   return (
-    <AlertDialog>
+    <AlertDialog isOpen={isOpen} onOpenChange={setIsOpen}>
       <AlertDialog.Trigger className="rounded-lg bg-red-600 px-3 py-2 text-sm text-white">Delete</AlertDialog.Trigger>
       <AlertDialog.Backdrop>
         <AlertDialog.Container placement="center">
@@ -28,8 +38,15 @@ function DeleteProductDialog({ product, onDelete }) {
               <p><strong>{product.name}</strong> will be permanently deleted. This action cannot be undone.</p>
             </AlertDialog.Body>
             <AlertDialog.Footer className="flex justify-end gap-3">
-              <AlertDialog.CloseTrigger className="rounded-lg border px-4 py-2">Cancel</AlertDialog.CloseTrigger>
-              <AlertDialog.CloseTrigger className="rounded-lg bg-red-600 px-4 py-2 text-white" onPress={onDelete}>Delete product</AlertDialog.CloseTrigger>
+              <AlertDialog.CloseTrigger isDisabled={isDeleting} className="rounded-lg border px-4 py-2 disabled:opacity-60">Cancel</AlertDialog.CloseTrigger>
+              <button
+                type="button"
+                className="rounded-lg bg-red-600 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={isDeleting}
+                onClick={confirmDelete}
+              >
+                {isDeleting ? "Deleting..." : "Delete product"}
+              </button>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>
         </AlertDialog.Container>
@@ -122,7 +139,10 @@ export default function DashboardView({ mode }) {
       body: body ? JSON.stringify(body) : undefined,
     });
     const result = await response.json().catch(() => ({}));
-    if (!response.ok) return toast.error(result.message || "Action failed");
+    if (!response.ok) {
+      toast.error(result.message || "Action failed");
+      return false;
+    }
     const successMessage = method === "DELETE"
       ? "Product deleted"
       : body.status === "approved"
@@ -132,6 +152,7 @@ export default function DashboardView({ mode }) {
           : "Product updated";
     toast.success(successMessage);
     setReload((value) => value + 1);
+    return true;
   };
 
   const userAction = async (id, body, successMessage) => {
