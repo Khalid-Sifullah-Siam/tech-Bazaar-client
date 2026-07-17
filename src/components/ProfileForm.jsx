@@ -10,6 +10,7 @@ export default function ProfileForm() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const user = session?.user;
 
   const submit = async (event) => {
@@ -50,7 +51,7 @@ export default function ProfileForm() {
           </div>
         </div>
 
-        <Modal>
+        <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
           <Modal.Trigger className="mt-8 inline-flex rounded-xl bg-foreground px-5 py-3 font-semibold text-background">
             Update profile
           </Modal.Trigger>
@@ -66,9 +67,16 @@ export default function ProfileForm() {
                     <label className="grid gap-1 text-sm">Email<input disabled value={user.email} className="rounded-xl border border-separator bg-default px-4 py-3" /></label>
                     <label className="grid gap-1 text-sm">Profile image URL<input name="image" defaultValue={user.image || ""} className="rounded-xl border border-separator bg-background px-4 py-3" /></label>
                   </Modal.Body>
-                  <Modal.Footer className="flex justify-end gap-3">
-                    <Modal.CloseTrigger className="rounded-xl border px-4 py-2">Cancel</Modal.CloseTrigger>
-                    <button disabled={loading} className="rounded-xl bg-foreground px-4 py-2 text-background disabled:opacity-50">{loading ? "Saving..." : "Save changes"}</button>
+                  <Modal.Footer className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+                    <button
+                      type="button"
+                      disabled={loading}
+                      onClick={() => setIsOpen(false)}
+                      className="min-w-32 rounded-xl border border-separator bg-surface px-5 py-2.5 font-medium text-foreground transition-colors hover:bg-default disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      Cancel
+                    </button>
+                    <button disabled={loading} className="min-w-32 rounded-xl bg-foreground px-5 py-2.5 font-medium text-background transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">{loading ? "Saving..." : "Save changes"}</button>
                   </Modal.Footer>
                 </form>
               </Modal.Dialog>
