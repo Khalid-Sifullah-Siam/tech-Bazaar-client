@@ -1,12 +1,14 @@
 'use client';
 
 import { Bars, Bell, Envelope, Gear, House, Magnifier, Person } from "@gravity-ui/icons";
-import { Button, Drawer } from "@heroui/react";
+import { Drawer } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import { useState } from "react";
 
 export default function DashboardSidebar() {
+  const [isOpen, setIsOpen] = useState(false);
   const adminItems = [
     { icon: House, label: "Overview", link: "/dashboard/admin" },
     { icon: Person, label: "User Management", link: "/dashboard/admin/user-management" },
@@ -38,12 +40,12 @@ export default function DashboardSidebar() {
 
 
   return (
-    <Drawer>
+    <Drawer isOpen={isOpen} onOpenChange={setIsOpen}>
       <div className="flex w-full justify-end md:hidden">
-        <Button variant="secondary" className="ml-auto w-fit self-end">
+        <Drawer.Trigger className="ml-auto flex w-fit items-center gap-2 rounded-xl border border-separator bg-surface px-4 py-2.5 text-sm font-medium">
           <Bars />
           Menu
-        </Button>
+        </Drawer.Trigger>
       </div>
 
       <div className="hidden md:block">
@@ -82,6 +84,7 @@ export default function DashboardSidebar() {
                   <Link
                     key={item.label}
                     href={item.link}
+                    onClick={() => setIsOpen(false)}
                     className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
                   >
                     <item.icon className="size-5 text-muted" />

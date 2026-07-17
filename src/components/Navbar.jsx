@@ -74,7 +74,7 @@ const Navbar = () => {
                 )}
               </svg>
             </button>
-            <Link href={'/'}>
+            <Link href="/" onClick={() => setIsMenuOpen(false)}>
               <div className="flex items-center gap-3">
                 <Image
                   height={40}
@@ -138,32 +138,34 @@ const Navbar = () => {
           <div className="border-t border-separator md:hidden">
             <ul className="flex flex-col gap-2 p-4">
               <li>
-                <Link href="/products" className="block py-2 font-medium text-accent">
+                <Link href="/products" onClick={() => setIsMenuOpen(false)} className="block py-2 font-medium text-accent">
                   Browse Products
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="block py-2">
+                <Link href="/pricing" onClick={() => setIsMenuOpen(false)} className="block py-2">
                   Pricing
                 </Link>
               </li>
-              {user && <li><Link href={`/dashboard/${user.role}`} className="block py-2">Dashboard</Link></li>}
+              {user && <li><Link href={`/dashboard/${user.role}`} onClick={() => setIsMenuOpen(false)} className="block py-2">Dashboard</Link></li>}
               {!user ? (
                 <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-                  <Link href="/signin" className="block py-2">Login</Link>
-                  <Link href="/signup"><Button className="w-full">Sign Up</Button></Link>
+                  <Link href="/signin" onClick={() => setIsMenuOpen(false)} className="block py-2">Login</Link>
+                  <Link href="/signup" onClick={() => setIsMenuOpen(false)}><Button className="w-full">Sign Up</Button></Link>
                 </li>
               ) : (
-                <li className="mt-4 flex items-center gap-3 border-t border-separator pt-4">
-                  <Avatar size="sm">
-                    <Avatar.Image alt={user.name} src={user.image || undefined} />
-                    <Avatar.Fallback>{user.name?.charAt(0) || "U"}</Avatar.Fallback>
-                  </Avatar>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">{user.name}</p>
-                    <p className="truncate text-xs text-muted">{user.email}</p>
+                <li className="mt-4 flex flex-col gap-3 border-t border-separator pt-4">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <Avatar size="sm">
+                      <Avatar.Image alt={user.name} src={user.image || undefined} />
+                      <Avatar.Fallback>{user.name?.charAt(0) || "U"}</Avatar.Fallback>
+                    </Avatar>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{user.name}</p>
+                      <p className="truncate text-xs text-muted">{user.email}</p>
+                    </div>
                   </div>
-                  <Button variant="danger" onPress={handleSignOut} isDisabled={isSigningOut}>
+                  <Button className="w-full" variant="danger" onPress={handleSignOut} isDisabled={isSigningOut}>
                     <BiLogOut /> Logout
                   </Button>
                 </li>
