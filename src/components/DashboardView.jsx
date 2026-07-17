@@ -28,7 +28,7 @@ function DeleteProductDialog({ product, onDelete }) {
   return (
     <AlertDialog isOpen={isOpen} onOpenChange={setIsOpen}>
       <AlertDialog.Trigger className="rounded-lg bg-red-600 px-3 py-2 text-sm text-white">Delete</AlertDialog.Trigger>
-      <AlertDialog.Backdrop>
+      <AlertDialog.Backdrop isDismissable={!isDeleting}>
         <AlertDialog.Container placement="center">
           <AlertDialog.Dialog>
             <AlertDialog.Header>
