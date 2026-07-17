@@ -6,6 +6,10 @@ export async function proxy(request) {
 
   if (!session) return NextResponse.redirect(new URL("/signin", request.url));
 
+  if (request.nextUrl.pathname === "/pricing" && session.user.role !== "seller") {
+    return NextResponse.redirect(new URL(`/dashboard/${session.user.role}`, request.url));
+  }
+
   const requestedRole = request.nextUrl.pathname.split("/")[2];
   if (["buyer", "seller", "admin"].includes(requestedRole) && requestedRole !== session.user.role) {
     return NextResponse.redirect(new URL(`/dashboard/${session.user.role}`, request.url));
@@ -15,5 +19,5 @@ export async function proxy(request) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard/:path*", "/pricing"],
 };

@@ -97,9 +97,11 @@ const Navbar = () => {
                 Browse Products
               </Link>
             </li>
-            <li>
-              <Link href="/pricing">Pricing</Link>
-            </li>
+            {user?.role === "seller" && (
+              <li>
+                <Link href="/pricing">Pricing</Link>
+              </li>
+            )}
           </ul>
          {!user && (
             <div className="hidden items-center gap-4 md:flex">
@@ -142,11 +144,13 @@ const Navbar = () => {
                   Browse Products
                 </Link>
               </li>
-              <li>
-                <Link href="/pricing" onClick={() => setIsMenuOpen(false)} className="block py-2">
-                  Pricing
-                </Link>
-              </li>
+              {user?.role === "seller" && (
+                <li>
+                  <Link href="/pricing" onClick={() => setIsMenuOpen(false)} className="block py-2">
+                    Pricing
+                  </Link>
+                </li>
+              )}
               {user && <li><Link href={`/dashboard/${user.role}`} onClick={() => setIsMenuOpen(false)} className="block py-2">Dashboard</Link></li>}
               {!user ? (
                 <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
