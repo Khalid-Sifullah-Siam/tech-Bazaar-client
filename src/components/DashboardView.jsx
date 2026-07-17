@@ -4,7 +4,6 @@ import { AlertDialog } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import ProductForm from "@/components/ProductForm";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -114,7 +113,6 @@ function UserActions({ user, onAction }) {
 }
 
 export default function DashboardView({ mode }) {
-  const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -124,10 +122,6 @@ export default function DashboardView({ mode }) {
   const endpoint = mode === "overview" ? "stats" : mode === "products" ? `products?scope=${role === "admin" ? "admin&status=all&limit=24" : "own&limit=24"}` : mode === "users" ? "users" : "payments";
 
   useEffect(() => {
-    if (!isPending && !session) {
-      router.replace("/signin");
-      return;
-    }
     if (!session) return;
     fetch(`/api/marketplace/${endpoint}`)
       .then(async (response) => {
@@ -137,7 +131,7 @@ export default function DashboardView({ mode }) {
       .then((result) => setData(result.items || result))
       .catch((error) => toast.error(error.message))
       .finally(() => setLoading(false));
-  }, [session, isPending, endpoint, reload, router]);
+  }, [session, endpoint, reload]);
 
   const productAction = async (id, method, body) => {
     const response = await fetch(`/api/marketplace/products/${id}`, {
@@ -174,7 +168,7 @@ export default function DashboardView({ mode }) {
     setReload((value) => value + 1);
   };
 
-  if (loading || isPending) return <p className="p-8 text-muted">Loading dashboard...</p>;
+  if (loading || isPending || !session) return <p className="p-8 text-muted">Loading dashboard...</p>;
 
   if (mode === "overview") {
     return <section className="w-full"><h1 className="mb-6 text-3xl font-bold capitalize">{role} overview</h1><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{Object.entries(data).map(([key, value]) => <div key={key} className="rounded-2xl border bg-surface p-6"><p className="text-sm text-muted">{labels[role]?.[key] || key}</p><p className="mt-2 text-3xl font-bold">{key === "spent" || key === "revenue" ? `$${Number(value).toFixed(2)}` : value}</p></div>)}</div></section>;
