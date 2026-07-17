@@ -1,5 +1,5 @@
-import { Button } from "@heroui/react";
 import PlanCheckout from "@/components/PlanCheckout";
+import Link from "next/link";
 
 export default function SellerPricingPage() {
   const plans = [
@@ -119,9 +119,12 @@ export default function SellerPricingPage() {
               </ul>
 
               {plan.name === "Enterprise Seller" ? (
-                <Button
-                  className={`mt-8 w-full  font-medium`}
-                >Contact Sales</Button>
+                <Link
+                  href="/contact-sales"
+                  className="mt-8 flex w-full items-center justify-center rounded-xl bg-foreground px-5 py-3 font-medium text-background transition-opacity hover:opacity-90"
+                >
+                  Contact Sales
+                </Link>
               ) : (
                 <div className="mt-8">
                   <PlanCheckout plan={plan.id}>Upgrade plan</PlanCheckout>
