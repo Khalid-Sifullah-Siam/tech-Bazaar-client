@@ -3,6 +3,7 @@
 import { Bars, Bell, Envelope, Gear, House, Magnifier, Person } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 
 export default function DashboardSidebar() {
@@ -11,6 +12,7 @@ export default function DashboardSidebar() {
     { icon: Person, label: "User Management", link: "/dashboard/admin/user-management" },
     { icon: Gear, label: "Maintain Products", link: "/dashboard/admin/maintain-products" },
     { icon: Bell, label: "Transactions", link: "/dashboard/admin/transactions" },
+    { icon: Person, label: "Profile", link: "/dashboard/profile" },
   ];
 
   const sellerItems = [
@@ -18,12 +20,15 @@ export default function DashboardSidebar() {
     { icon: Magnifier, label: "Add Products", link: "/dashboard/seller/add-products" },
     { icon: Bell, label: "Products", link: "/dashboard/seller/products" },
     { icon: Envelope, label: "Subscription History", link: "/dashboard/seller/subscription-history" },
+    { icon: Person, label: "Profile", link: "/dashboard/profile" },
   ];
 
   const buyerItems = [
     { icon: House, label: "Overview", link: "/dashboard/buyer" },
     { icon: Magnifier, label: "Products", link: "/dashboard/buyer/products" },
+    { icon: Gear, label: "Purchases", link: "/dashboard/buyer/purchases" },
     { icon: Bell, label: "Transactions", link: "/dashboard/buyer/transactions" },
+    { icon: Person, label: "Profile", link: "/dashboard/profile" },
   ];
 
   const { data: session } = authClient.useSession();
@@ -52,14 +57,14 @@ export default function DashboardSidebar() {
 
         <nav className="flex h-screen flex-col gap-1 border-r pt-6">
           {navItems.map((item) => (
-            <button
+            <Link
               key={item.label}
+              href={item.link}
               className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
-              type="button"
             >
               <item.icon className="size-5 text-muted" />
               {item.label}
-            </button>
+            </Link>
           ))}
         </nav>
       </div>
@@ -74,14 +79,14 @@ export default function DashboardSidebar() {
             <Drawer.Body>
               <nav className="flex flex-col gap-1">
                 {navItems.map((item) => (
-                  <button
+                  <Link
                     key={item.label}
+                    href={item.link}
                     className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
-                    type="button"
                   >
                     <item.icon className="size-5 text-muted" />
                     {item.label}
-                  </button>
+                  </Link>
                 ))}
               </nav>
             </Drawer.Body>

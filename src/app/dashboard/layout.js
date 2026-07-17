@@ -6,7 +6,7 @@ export default function DashboardLayout({ children }) {
       <div className="w-full md:w-auto">
         <DashboardSidebar />
       </div>
-      <main className="min-h-screen px-2">{children}</main>
+      <main className="min-h-screen min-w-0 flex-1 px-2">{children}</main>
     </div>
   );
 }

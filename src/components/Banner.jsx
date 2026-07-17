@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 const banners = [
   "https://rokbucket.rokomari.io/banner/DESKTOPceb599bd-9932-4da0-ab50-b266d1040886.webp",
@@ -53,11 +54,15 @@ export default function BannerSlider() {
       <div className="flex">
         {banners.map((banner, index) => (
           <div key={index} className="relative min-w-0 flex-[0_0_100%]">
-            <img
+            <Image
               src={banner}
               alt={`Banner ${index + 1}`}
+              width={1600}
+              height={500}
+              sizes="100vw"
+              unoptimized
               className="w-full object-cover"
-              loading={index === 0 ? "eager" : "lazy"}
+              priority={index === 0}
             />
           </div>
         ))}

@@ -22,6 +22,25 @@ export const auth = betterAuth({
       },
       plan: {
         defaultValue: "free",
+        input: false,
+      },
+      status: {
+        defaultValue: "active",
+        input: false,
+      },
+    },
+  },
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => ({
+          data: {
+            ...user,
+            role: user.role === "seller" ? "seller" : "buyer",
+            plan: "free",
+            status: "active",
+          },
+        }),
       },
     },
   },

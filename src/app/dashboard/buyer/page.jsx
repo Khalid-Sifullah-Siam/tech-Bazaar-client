@@ -1,11 +1,2 @@
-import React from 'react';
-
-const BuyerPage = () => {
-    return (
-        <div>
-            buyer
-        </div>
-    );
-};
-
-export default BuyerPage;
+import DashboardView from "@/components/DashboardView";
+export default function BuyerPage() { return <DashboardView mode="overview" />; }

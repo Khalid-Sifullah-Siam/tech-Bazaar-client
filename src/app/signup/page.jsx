@@ -29,7 +29,6 @@ export default function SignUpPage() {
 
     const { error } = await authClient.signUp.email({
       ...user,
-      plan: "free",
     });
 
     setIsLoading(false);

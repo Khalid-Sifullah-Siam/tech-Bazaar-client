@@ -120,6 +120,9 @@ const Navbar = () => {
                 <p className="truncate text-sm font-medium">{user.name}</p>
                 <p className="truncate text-xs text-muted">{user.email}</p>
               </div>
+              <Link href={`/dashboard/${user.role}`} className="text-sm font-medium text-accent">
+                Dashboard
+              </Link>
               <Button
                 variant="danger"
                 onPress={handleSignOut}
@@ -135,20 +138,16 @@ const Navbar = () => {
           <div className="border-t border-separator md:hidden">
             <ul className="flex flex-col gap-2 p-4">
               <li>
-                <Link href="#" className="block py-2">
-                  Features
+                <Link href="/products" className="block py-2 font-medium text-accent">
+                  Browse Products
                 </Link>
               </li>
               <li>
-                <Link href="#" className="block py-2 font-medium text-accent">
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="block py-2">
+                <Link href="/pricing" className="block py-2">
                   Pricing
                 </Link>
               </li>
+              {user && <li><Link href={`/dashboard/${user.role}`} className="block py-2">Dashboard</Link></li>}
               {!user ? (
                 <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
                   <Link href="/signin" className="block py-2">Login</Link>

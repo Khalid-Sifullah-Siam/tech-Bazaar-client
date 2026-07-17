@@ -1,11 +1,2 @@
-
-
-const SellerPage = () => {
-    return (
-        <div>
-           seller 
-        </div>
-    );
-};
-
-export default SellerPage;
+import DashboardView from "@/components/DashboardView";
+export default function SellerPage() { return <DashboardView mode="overview" />; }

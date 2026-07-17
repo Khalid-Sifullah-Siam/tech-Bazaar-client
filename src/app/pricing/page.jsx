@@ -1,11 +1,13 @@
 import { Button } from "@heroui/react";
+import PlanCheckout from "@/components/PlanCheckout";
 
 export default function SellerPricingPage() {
   const plans = [
     {
       name: "Starter Seller",
-      price: "$4",
-      period: "/month",
+      id: "starter",
+      price: "$19",
+      period: " one-time",
       description: "Perfect for new sellers starting their journey.",
       features: [
         "Up to 50 products",
@@ -18,8 +20,9 @@ export default function SellerPricingPage() {
     },
     {
       name: "Professional Seller",
-      price: "$14",
-      period: "/month",
+      id: "pro",
+      price: "$49",
+      period: " one-time",
       description: "For growing businesses that need more visibility.",
       features: [
         "Unlimited products",
@@ -120,9 +123,9 @@ export default function SellerPricingPage() {
                   className={`mt-8 w-full  font-medium`}
                 >Contact Sales</Button>
               ) : (
-                <Button
-                  className={`mt-8 w-full  font-medium`}
-                >Become Seller</Button>
+                <div className="mt-8">
+                  <PlanCheckout plan={plan.id}>Upgrade plan</PlanCheckout>
+                </div>
               )}
             </div>
           ))}

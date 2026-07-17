@@ -1,18 +1,19 @@
 import { NextResponse } from "next/server";
 import { auth } from "./lib/auth";
-import { cookies, headers } from "next/headers"; 
 
 export async function proxy(request) {
-   const session = await auth.api.getSession({
-    headers: await headers()
-   }) 
+  const session = await auth.api.getSession({ headers: request.headers });
 
-   if(!session){
-    return NextResponse.redirect(new URL('/signin', request.url))
-   }
+  if (!session) return NextResponse.redirect(new URL("/signin", request.url));
 
+  const requestedRole = request.nextUrl.pathname.split("/")[2];
+  if (["buyer", "seller", "admin"].includes(requestedRole) && requestedRole !== session.user.role) {
+    return NextResponse.redirect(new URL(`/dashboard/${session.user.role}`, request.url));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-    matcher: ['/profile']
-}
+  matcher: ["/dashboard/:path*"],
+};
