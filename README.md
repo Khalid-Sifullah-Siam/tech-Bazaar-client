@@ -1,12 +1,12 @@
-# Bazaar
+<h1 align="center">Tech Bazaar</h1>
 
-> Discover products. Sell with control. Buy securely with Stripe.
+<p align="center"><strong>Discover products. Sell with control. Buy securely with Stripe.</strong></p>
 
-Bazaar is a modern role-based technology marketplace for buyers, sellers, and administrators. Buyers can discover approved products and complete secure Stripe checkouts, sellers can manage their catalog and plans, and admins can moderate the marketplace from a dedicated dashboard.
+Tech Bazaar is a modern role-based technology marketplace for buyers, sellers, and administrators. Buyers can discover approved products and complete secure Stripe checkouts, sellers can manage their catalog and plans, and admins can moderate the marketplace from a dedicated dashboard.
 
 <p>
-  <a href="https://tech-bazar-client.vercel.app/">Live Site</a> ·
-  <a href="https://github.com/Khalid-Sifullah-Siam/tech-Bazaar-client">Client Repository</a> ·
+  <a href="https://tech-bazar-client.vercel.app/">Live Site</a> |
+  <a href="https://github.com/Khalid-Sifullah-Siam/tech-Bazaar-client">Client Repository</a> |
   <a href="https://github.com/Khalid-Sifullah-Siam/tech-Bazaar-server">Server Repository</a>
 </p>
 
@@ -14,7 +14,7 @@ Bazaar is a modern role-based technology marketplace for buyers, sellers, and ad
 
 ## Overview
 
-Bazaar brings the complete marketplace workflow into one responsive application:
+Tech Bazaar brings the complete marketplace workflow into one responsive application:
 
 - Browse approved products with search, filters, sorting, and pagination.
 - View product details, choose quantity, and pay through Stripe Checkout.
@@ -88,18 +88,18 @@ Admins can manage the marketplace from protected admin routes:
 
 ```text
 bazaar-client/
-├── public/
-│   └── images/                         # Project screenshots
-├── src/
-│   ├── app/                            # Pages, layouts, loading, error, and not-found states
-│   │   └── api/
-│   │       ├── auth/[...all]/           # Better Auth handler
-│   │       └── marketplace/[...path]/   # Marketplace API routes
-│   ├── components/                     # Reusable UI and dashboard components
-│   ├── lib/                            # Auth, Stripe, database, and marketplace helpers
-│   └── proxy.js                        # Authentication and role-based route protection
-├── package.json
-└── README.md
+||||||||||||||||||||||| public/
+||||||||   |||||||||||||||||||||||| images/                         # Project screenshots
+||||||||||||||||||||||| src/
+||||||||   ||||||||||||||||||||||| app/                            # Pages, layouts, loading, error, and not-found states
+||||||||   ||||||||   |||||||||||||||||||||||| api/
+||||||||   ||||||||       ||||||||||||||||||||||| auth/[...all]/           # Better Auth handler
+||||||||   ||||||||       |||||||||||||||||||||||| marketplace/[...path]/   # Marketplace API routes
+||||||||   ||||||||||||||||||||||| components/                     # Reusable UI and dashboard components
+||||||||   ||||||||||||||||||||||| lib/                            # Auth, Stripe, database, and marketplace helpers
+||||||||   |||||||||||||||||||||||| proxy.js                        # Authentication and role-based route protection
+||||||||||||||||||||||| package.json
+|||||||||||||||||||||||| README.md
 ```
 
 The companion server is available at [tech-Bazaar-server](https://github.com/Khalid-Sifullah-Siam/tech-Bazaar-server). The current client contains the active marketplace route handlers; the Express server remains the companion server project for the ecosystem.
@@ -176,35 +176,147 @@ The health endpoint is available at [http://localhost:5000](http://localhost:500
 
 ## Screenshots
 
-Screenshots are stored in [`public/images`](./public/images). They are listed in serial order below.
+Screenshots are stored in [public/images](./public/images). Each image is shown at full width with a consistent height and listed in serial order.
 
-| Photo 01 | Photo 02 | Photo 03 | Photo 04 |
-| --- | --- | --- | --- |
-| ![Photo 01](./public/images/Screenshot%20%28477%29.png) | ![Photo 02](./public/images/Screenshot%20%28478%29.png) | ![Photo 03](./public/images/Screenshot%20%28479%29.png) | ![Photo 04](./public/images/Screenshot%20%28480%29.png) |
+<div align="center">
+  <p><strong>Photo 01</strong></p>
+  <img src="./public/images/Screenshot%20%28477%29.png" alt="Tech Bazaar screenshot 01" width="100%" height="420" />
+</div>
 
-| Photo 05 | Photo 06 | Photo 07 | Photo 08 |
-| --- | --- | --- | --- |
-| ![Photo 05](./public/images/Screenshot%20%28481%29.png) | ![Photo 06](./public/images/Screenshot%20%28482%29.png) | ![Photo 07](./public/images/Screenshot%20%28483%29.png) | ![Photo 08](./public/images/Screenshot%20%28484%29.png) |
+<div align="center">
+  <p><strong>Photo 02</strong></p>
+  <img src="./public/images/Screenshot%20%28478%29.png" alt="Tech Bazaar screenshot 02" width="100%" height="420" />
+</div>
 
-| Photo 09 | Photo 10 | Photo 11 | Photo 12 |
-| --- | --- | --- | --- |
-| ![Photo 09](./public/images/Screenshot%20%28485%29.png) | ![Photo 10](./public/images/Screenshot%20%28486%29.png) | ![Photo 11](./public/images/Screenshot%20%28487%29.png) | ![Photo 12](./public/images/Screenshot%20%28488%29.png) |
+<div align="center">
+  <p><strong>Photo 03</strong></p>
+  <img src="./public/images/Screenshot%20%28479%29.png" alt="Tech Bazaar screenshot 03" width="100%" height="420" />
+</div>
 
-| Photo 13 | Photo 14 | Photo 15 | Photo 16 |
-| --- | --- | --- | --- |
-| ![Photo 13](./public/images/Screenshot%20%28489%29.png) | ![Photo 14](./public/images/Screenshot%20%28490%29.png) | ![Photo 15](./public/images/Screenshot%20%28491%29.png) | ![Photo 16](./public/images/Screenshot%20%28492%29.png) |
+<div align="center">
+  <p><strong>Photo 04</strong></p>
+  <img src="./public/images/Screenshot%20%28480%29.png" alt="Tech Bazaar screenshot 04" width="100%" height="420" />
+</div>
 
-| Photo 17 | Photo 18 | Photo 19 | Photo 20 |
-| --- | --- | --- | --- |
-| ![Photo 17](./public/images/Screenshot%20%28493%29.png) | ![Photo 18](./public/images/Screenshot%20%28494%29.png) | ![Photo 19](./public/images/Screenshot%20%28495%29.png) | ![Photo 20](./public/images/Screenshot%20%28496%29.png) |
+<div align="center">
+  <p><strong>Photo 05</strong></p>
+  <img src="./public/images/Screenshot%20%28481%29.png" alt="Tech Bazaar screenshot 05" width="100%" height="420" />
+</div>
 
-| Photo 21 | Photo 22 | Photo 23 | Photo 24 |
-| --- | --- | --- | --- |
-| ![Photo 21](./public/images/Screenshot%20%28497%29.png) | ![Photo 22](./public/images/Screenshot%20%28498%29.png) | ![Photo 23](./public/images/Screenshot%20%28499%29.png) | ![Photo 24](./public/images/Screenshot%20%28500%29.png) |
+<div align="center">
+  <p><strong>Photo 06</strong></p>
+  <img src="./public/images/Screenshot%20%28482%29.png" alt="Tech Bazaar screenshot 06" width="100%" height="420" />
+</div>
 
-| Photo 25 | Photo 26 | Photo 27 | Photo 28 |
-| --- | --- | --- | --- |
-| ![Photo 25](./public/images/Screenshot%20%28501%29.png) | ![Photo 26](./public/images/Screenshot%20%28502%29.png) | ![Photo 27](./public/images/Screenshot%20%28503%29.png) | ![Photo 28](./public/images/Screenshot%20%28504%29.png) |
+<div align="center">
+  <p><strong>Photo 07</strong></p>
+  <img src="./public/images/Screenshot%20%28483%29.png" alt="Tech Bazaar screenshot 07" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 08</strong></p>
+  <img src="./public/images/Screenshot%20%28484%29.png" alt="Tech Bazaar screenshot 08" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 09</strong></p>
+  <img src="./public/images/Screenshot%20%28485%29.png" alt="Tech Bazaar screenshot 09" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 10</strong></p>
+  <img src="./public/images/Screenshot%20%28486%29.png" alt="Tech Bazaar screenshot 10" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 11</strong></p>
+  <img src="./public/images/Screenshot%20%28487%29.png" alt="Tech Bazaar screenshot 11" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 12</strong></p>
+  <img src="./public/images/Screenshot%20%28488%29.png" alt="Tech Bazaar screenshot 12" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 13</strong></p>
+  <img src="./public/images/Screenshot%20%28489%29.png" alt="Tech Bazaar screenshot 13" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 14</strong></p>
+  <img src="./public/images/Screenshot%20%28490%29.png" alt="Tech Bazaar screenshot 14" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 15</strong></p>
+  <img src="./public/images/Screenshot%20%28491%29.png" alt="Tech Bazaar screenshot 15" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 16</strong></p>
+  <img src="./public/images/Screenshot%20%28492%29.png" alt="Tech Bazaar screenshot 16" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 17</strong></p>
+  <img src="./public/images/Screenshot%20%28493%29.png" alt="Tech Bazaar screenshot 17" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 18</strong></p>
+  <img src="./public/images/Screenshot%20%28494%29.png" alt="Tech Bazaar screenshot 18" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 19</strong></p>
+  <img src="./public/images/Screenshot%20%28495%29.png" alt="Tech Bazaar screenshot 19" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 20</strong></p>
+  <img src="./public/images/Screenshot%20%28496%29.png" alt="Tech Bazaar screenshot 20" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 21</strong></p>
+  <img src="./public/images/Screenshot%20%28497%29.png" alt="Tech Bazaar screenshot 21" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 22</strong></p>
+  <img src="./public/images/Screenshot%20%28498%29.png" alt="Tech Bazaar screenshot 22" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 23</strong></p>
+  <img src="./public/images/Screenshot%20%28499%29.png" alt="Tech Bazaar screenshot 23" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 24</strong></p>
+  <img src="./public/images/Screenshot%20%28500%29.png" alt="Tech Bazaar screenshot 24" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 25</strong></p>
+  <img src="./public/images/Screenshot%20%28501%29.png" alt="Tech Bazaar screenshot 25" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 26</strong></p>
+  <img src="./public/images/Screenshot%20%28502%29.png" alt="Tech Bazaar screenshot 26" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 27</strong></p>
+  <img src="./public/images/Screenshot%20%28503%29.png" alt="Tech Bazaar screenshot 27" width="100%" height="420" />
+</div>
+
+<div align="center">
+  <p><strong>Photo 28</strong></p>
+  <img src="./public/images/Screenshot%20%28504%29.png" alt="Tech Bazaar screenshot 28" width="100%" height="420" />
+</div>
 
 ## Security Notes
 
